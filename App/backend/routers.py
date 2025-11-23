@@ -17,7 +17,8 @@ def create_tarefa_route(payload: TarefaCreate, db: Session = Depends(get_db)):
         return create_tarefa(db=db, tarefa=payload)
     except IntegrityError:
         db.rollback()
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Erro ao criar. Dados duplicados ou inválidos.")
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT,
+                            detail="Erro ao criar. Dados duplicados ou inválidos.")
 
 
 @router.get("/", response_model=List[TarefaOut])
@@ -26,7 +27,7 @@ def get_tarefas_route(db: Session = Depends(get_db)):
 
 
 @router.get("/buscar", response_model=List[TarefaOut])
-def search_tarefa_route(q: str = Query(..., min_lenght=2, description="Termo a ser buscado"),db: Session = Depends(get_db)):
+def search_tarefa_route(q: str = Query(..., min_length=2, description="Termo a ser buscado"), db: Session = Depends(get_db)):
     return search_tarefas_by_name(db, termo=q)
 
 
@@ -34,7 +35,8 @@ def search_tarefa_route(q: str = Query(..., min_lenght=2, description="Termo a s
 def update_tarefa_route(tarefa_id: int, payload: TarefaCreate, db: Session = Depends(get_db)):
     db_tarefa = update_tarefa(db, tarefa_id=tarefa_id, tarefa=payload)
     if db_tarefa is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Tarefa não encontrada")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Tarefa não encontrada")
     return db_tarefa
 
 
@@ -42,5 +44,6 @@ def update_tarefa_route(tarefa_id: int, payload: TarefaCreate, db: Session = Dep
 def delete_tarefa_route(tarefa_id: int, db: Session = Depends(get_db)):
     db_tarefa = delete_tarefa(db, tarefa_id=tarefa_id)
     if db_tarefa is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Tarefa não encontrada")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Tarefa não encontrada")
     return db_tarefa

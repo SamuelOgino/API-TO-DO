@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime
 from .database import Base
 import datetime
 
+
 class Tarefa(Base):
     __tablename__ = "tarefas"
 
