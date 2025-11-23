@@ -12,6 +12,12 @@ def get_tarefas(db: Session):
     # .all para pegar a lista completa de tudo que tem na tabela
     return db.query(models.Tarefa).all()
 
+
+def search_tarefas_by_name(db: Session, termo: str):
+    # .ilike faz a busca, ignorando maiúsculas e minúsculas
+    # f"%{termo}%" a palavra buscada
+    return db.query(models.Tarefa).filter(models.Tarefa.titulo.ilike(f"%{termo}%")).all()
+
 # Cria uma nova tarefa
 def create_tarefa(db: Session, tarefa: schemas.TarefaCreate):
 
