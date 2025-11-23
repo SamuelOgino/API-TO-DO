@@ -5,7 +5,7 @@ import os
 DATABASE_URL: str | None = os.getenv("DATABASE_URL")
 
 if not DATABASE_URL:
-    DATABASE_URL = "sqlite:///./todo.db"
+    DATABASE_URL = "sqlite:///../../todo.db"
 
 
 engine = create_engine(
