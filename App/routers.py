@@ -33,7 +33,7 @@ def update_tarefa_route(tarefa_id: int, payload: TarefaCreate, db: Session = Dep
     return db_tarefa
 
 
-@router.delete("/{tarefa_id}", response_model=TarefaCreate)
+@router.delete("/{tarefa_id}", response_model=TarefaOut)
 def delete_tarefa_route(tarefa_id: int, db: Session = Depends(get_db)):
     db_tarefa = delete_tarefa(db, tarefa_id=tarefa_id)
     if db_tarefa is None:
