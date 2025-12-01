@@ -25,13 +25,13 @@ def search_tarefas_by_name(db: Session, termo: str):
 # Cria uma nova tarefa
 
 
-def create_tarefa(db: Session, payload: schemas.TarefaCreate):
+def create_tarefa(db: Session, tarefa: schemas.TarefaCreate):
 
     db_tarefa = models.Tarefa(
-        titulo=payload.titulo,
-        descricao=payload.descricao,
-        concluida=payload.concluida,
-        data_limite=payload.data_limite
+        titulo=tarefa.titulo,
+        descricao=tarefa.descricao,
+        concluida=tarefa.concluida,
+        data_limite=tarefa.data_limite
     )
 
     db.add(db_tarefa)
